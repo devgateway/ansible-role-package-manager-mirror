@@ -17,3 +17,20 @@
     option: baseurl
     value: "{{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] }}{{ item.uri }}"
   with_items: "{{ pkgmgr_sl7_sections }}"
+
+- name: Remove non-compliant lines from optional repos
+  lineinfile:
+    regexp: "^[^[=]+$"
+    state: absent
+    dest: /etc/yum.repos.d/{{ item }}
+  with_items: "{{ pkgmgr_sl7_optional | map(attribute = 'file') | unique | list }}"
+
+- name: Configure baseurl in optional repos
+  ini_file:
+    dest: /etc/yum.repos.d/{{ item.file }}
+    create: false
+    section: "{{ item.section }}"
+    option: baseurl
+    value: "{{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] }}{{ item.uri }}"
+  with_items: "{{ pkgmgr_sl7_optional }}"
+  ignore_errors: true

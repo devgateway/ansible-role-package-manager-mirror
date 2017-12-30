@@ -30,3 +30,19 @@ pkgmgr_sl7_sections:
   - file: sl7-testing.repo
     section: sl-testing-source
     uri: /7rolling/testing/SRPMS/
+pkgmgr_sl7_optional:
+  - file: repos.repo
+    section: repos
+    uri: /7x/repos/$basearch/
+  - file: repos.repo
+    section: repos-source
+    uri: /7x/repos/SRPMS/
+  - file: sl-extras.repo
+    section: sl-extras
+    uri: /7x/external_products/extras/$basearch/
+  - file: sl-extras.repo
+    section: sl-extras-debuginfo
+    uri: /7x/external_products/extras/$basearch/debuginfo/
+  - file: sl-extras.repo
+    section: sl-extras-source
+    uri: /7x/external_products/extras/SRPMS/
