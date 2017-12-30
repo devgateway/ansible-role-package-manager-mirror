@@ -1,8 +1,11 @@
 {%- macro pkgmgr_debian_mirror() -%}
   {%- set default_release = pkgmgr_mirror[ansible_distribution].default -%}
+  {%- set debian_release -%}
+    {{ ansible_lsb.codename | default(ansible_distribution_release) }}
+  {%- endset -%}
 
-  {%- if pkgmgr_mirror[ansible_distribution][ansible_lsb.codename] is defined -%}
-    {%- set this_release = pkgmgr_mirror[ansible_distribution][ansible_lsb.codename] -%}
+  {%- if pkgmgr_mirror[ansible_distribution][debian_release] is defined -%}
+    {%- set this_release = pkgmgr_mirror[ansible_distribution][debian_release] -%}
   {%- else -%}
     {%- set this_release = default_release -%}
   {%- endif -%}
@@ -13,7 +16,7 @@
     {%- set components = default_release.components -%}
   {%- endif -%}
 
-  {{ this_release.url | default(default_release.url) }} {{ ansible_lsb.codename }} {{ components | join(" ") }}
+  {{ this_release.url | default(default_release.url) }} {{ debian_release }} {{ components | join(" ") }}
 {%- endmacro -%}
 
 deb {{ pkgmgr_debian_mirror() }}
