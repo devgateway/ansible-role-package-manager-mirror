@@ -1,5 +1,5 @@
 ---
-- name: Load variables for Scientific 7
+- name: Load variables for {{ ansible_distribution }} {{ ansible_distribution_major_version }}
   include_vars:
     file: scientific7.yml
 
@@ -9,3 +9,11 @@
     state: absent
     dest: /etc/yum.repos.d/{{ item }}
   with_items: "{{ pkgmgr_sl7_sections | map(attribute = 'file') | unique | list }}"
+
+- name: Configure baseurl in stock repos
+  ini_file:
+    dest: /etc/yum.repos.d/{{ item.file }}
+    section: "{{ item.section }}"
+    option: baseurl
+    value: "{{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] }}{{ item.uri }}"
+  with_items: "{{ pkgmgr_sl7_sections }}"
