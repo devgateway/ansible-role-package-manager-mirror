@@ -1,0 +1,11 @@
+---
+- name: Load variables for Scientific 7
+  include_vars:
+    file: scientific7.yml
+
+- name: Remove lines non-compliant with INI format
+  lineinfile:
+    regexp: "^[^[=]+$"
+    state: absent
+    dest: /etc/yum.repos.d/{{ item }}
+  with_items: "{{ pkgmgr_sl7_sections | map(attribute = 'file') | unique | list }}"

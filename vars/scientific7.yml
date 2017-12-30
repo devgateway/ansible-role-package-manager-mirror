@@ -1,0 +1,32 @@
+---
+pkgmgr_sl7_sections:
+  - file: sl7-fastbugs.repo
+    section: sl-fastbugs
+    uri: /$slreleasever/$basearch/updates/fastbugs/
+  - file: sl7-other.repo
+    section: sl-source
+    uri: /$slreleasever/SRPMS/
+  - file: sl7-other.repo
+    section: sl-debuginfo
+    uri: /$slreleasever/archive/debuginfo/
+  - file: sl7.repo
+    section: sl
+    uri: /$slreleasever/$basearch/os/
+  - file: sl7-rolling.repo
+    section: sl-rolling
+    uri: /7rolling/$basearch/os/
+  - file: sl7-rolling.repo
+    section: sl-rolling-security
+    uri: /7rolling/$basearch/updates/security/
+  - file: sl7-rolling.repo
+    section: sl-rolling-fastbugs
+    uri: /7rolling/$basearch/updates/fastbugs/
+  - file: sl7-security.repo
+    section: sl-security
+    uri: /$slreleasever/$basearch/updates/security/
+  - file: sl7-testing.repo
+    section: sl-testing
+    uri: /7rolling/testing/$basearch/
+  - file: sl7-testing.repo
+    section: sl-testing-source
+    uri: /7rolling/testing/SRPMS/
