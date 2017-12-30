@@ -3,3 +3,8 @@
   file:
     path: /etc/apt/sources.list
     state: absent
+
+- name: Install mirror definition
+  template:
+    src: sources.list.j2
+    dest: /etc/apt/sources.list.d/mirror.list
