@@ -10,11 +10,27 @@ A description of the settable variables for this role should go here, including 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+    ---
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+        - role: package-manager-mirror
+          pkgmgr_mirror:
+            Debian: 
+              default:
+                url: http://ftp.us.debian.org/debian/
+                components:
+                  - main
+                  - contrib
+              sid:
+                components:
+                  - main
+                  - non-free
+                  - contrib
+            CentOS:
+              v7: http://mirror.centos.org/centos
+            Scientific:
+              v7: http://ftp.scientificlinux.org/linux/scientific
+              v6: http://ftp.scientificlinux.org/linux/scientific
 
 License
 -------
