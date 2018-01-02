@@ -1,5 +1,5 @@
 ---
-pkgmgr_sl7_sections:
+pkgmgr_sl_sections:
   - file: sl7-fastbugs.repo
     section: sl-fastbugs
     uri: /$slreleasever/$basearch/updates/fastbugs/
@@ -30,7 +30,7 @@ pkgmgr_sl7_sections:
   - file: sl7-testing.repo
     section: sl-testing-source
     uri: /7rolling/testing/SRPMS/
-pkgmgr_sl7_optional:
+pkgmgr_sl_optional:
   - file: repos.repo
     section: repos
     uri: /7x/repos/$basearch/

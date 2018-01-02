@@ -1,0 +1,11 @@
+---
+pkgmgr_sl_sections:
+  - file: sl.repo
+    section: sl
+    uri: /$releasever/$basearch/os/
+  - file: sl.repo
+    section: sl-security
+    uri: /$releasever/$basearch/updates/security/
+  - file: sl.repo
+    section: sl-source
+    uri: /$releasever/SRPMS/
