@@ -1,0 +1,4 @@
+---
+- name: Load variables for Fedora (all versions)
+  include_vars:
+    file: "fedora.yml"

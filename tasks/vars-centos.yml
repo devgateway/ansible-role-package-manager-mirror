@@ -1,0 +1,4 @@
+---
+- name: Load variables for CentOS {{ ansible_distribution_major_version }}
+  include_vars:
+    file: "centos{{ ansible_distribution_major_version }}.yml"

@@ -1,0 +1,4 @@
+---
+- name: Load variables for Scientific {{ ansible_distribution_major_version }}
+  include_vars:
+    file: "scientific{{ ansible_distribution_major_version }}.yml"
