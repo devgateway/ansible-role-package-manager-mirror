@@ -6,15 +6,15 @@
 # Regex explanation: find non-empty lines until EOL or comment (marked by "#" or ";") entirely
 # consisting of characters other than "=" and "[". In other words, find non-empty, non-comment
 # lines that are neither section names nor "option = value" pairs.
-- name: Find standard repos not conforming to INI format
+- name: Find repos not conforming to INI format
   command: >
     grep -l '^[^#=[]\+\($\|[#;]\)'
-    {{ pkgmgr_sl_sections | map(attribute = 'file') | unique | map('quote') | join(' ') }}
+    {{ pkgmgr_repos | map(attribute = 'file') | map('quote') | join(' ') }}
   args:
     chdir: /etc/yum.repos.d
-  register: pkgmgr_grep_result
+  register: grep_result
   changed_when: false
-  failed_when: pkgmgr_grep_result.rc > 2
+  failed_when: grep_result.rc > 2
 
 # Script explanation
 # FIRST LINE:
@@ -32,7 +32,7 @@
 # - unfold
 # - if last line:
 #   - append hold space to pattern space
-- name: Unfold lines in standard repos
+- name: Unfold lines in repos
   command: >
     sed -i
     '1 { h; d; };
@@ -46,57 +46,18 @@
     s/[[:space:]]\+/ /g;
     $ G;
     };'
-    {{ pkgmgr_grep_result.stdout_lines | map('quote') | join(' ') }}
-  when: pkgmgr_grep_result.rc == 0
+    {{ grep_result.stdout_lines | map('quote') | join(' ') }}
+  when: grep_result.rc == 0
   args:
     chdir: /etc/yum.repos.d
     warn: false
 
-- name: Configure baseurl in standard repos
+- name: Configure baseurl in repos
   ini_file:
-    dest: /etc/yum.repos.d/{{ item.file }}
-    section: "{{ item.section }}"
+    dest: /etc/yum.repos.d/{{ item[0].file }}
+    section: "{{ item[1].name }}"
     option: baseurl
-    value: "{{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] }}{{ item.uri }}"
-  with_items: "{{ pkgmgr_sl_sections }}"
-
-- name: Find optional repos not conforming to INI format
-  command: >
-    grep -l '^[^#=[]\+\($\|[#;]\)'
-    {{ pkgmgr_sl_optional | map(attribute = 'file') | unique | map('quote') | join(' ') }}
-  args:
-    chdir: /etc/yum.repos.d
-  register: pkgmgr_grep_result
-  when: pkgmgr_sl_optional is defined
-  changed_when: false
-  failed_when: pkgmgr_grep_result.rc > 2
-
-- name: Unfold lines in optional repos
-  command: >
-    sed -i
-    '1 { h; d; };
-    /^[^#=[]\+\($\|[#;]\)/ {
-    H;
-    $ { x; s/[[:space:]]\+/ /g; };
-    $! d;
-    };
-    /^[^#=[]\+\($\|[#;]\)/! {
-    x;
-    s/[[:space:]]\+/ /g;
-    $ G;
-    };'
-    {{ pkgmgr_grep_result.stdout_lines | map('quote') | join(' ') }}
-  when: pkgmgr_sl_optional is defined and pkgmgr_grep_result.rc == 0
-  args:
-    chdir: /etc/yum.repos.d
-    warn: false
-  
-- name: Configure baseurl in optional repos
-  ini_file:
-    dest: /etc/yum.repos.d/{{ item.file }}
-    create: false
-    section: "{{ item.section }}"
-    option: baseurl
-    value: "{{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] }}{{ item.uri }}"
-  with_items: "{{ pkgmgr_sl_optional }}"
-  when: pkgmgr_sl_optional is defined
+    value: "{{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] }}{{ item[1].uri }}"
+  with_subelements:
+    - "{{ pkgmgr_repos }}"
+    - sections

@@ -1,48 +1,34 @@
 ---
-pkgmgr_sl_sections:
-  - file: sl7-fastbugs.repo
-    section: sl-fastbugs
-    uri: /$slreleasever/$basearch/updates/fastbugs/
-  - file: sl7-other.repo
-    section: sl-source
-    uri: /$slreleasever/SRPMS/
-  - file: sl7-other.repo
-    section: sl-debuginfo
-    uri: /$slreleasever/archive/debuginfo/
+pkgmgr_repos:
   - file: sl7.repo
-    section: sl
-    uri: /$slreleasever/$basearch/os/
-  - file: sl7-rolling.repo
-    section: sl-rolling
-    uri: /7rolling/$basearch/os/
-  - file: sl7-rolling.repo
-    section: sl-rolling-security
-    uri: /7rolling/$basearch/updates/security/
-  - file: sl7-rolling.repo
-    section: sl-rolling-fastbugs
-    uri: /7rolling/$basearch/updates/fastbugs/
+    sections:
+      - name: sl
+        uri: /$slreleasever/$basearch/os/
+  - file: sl7-fastbugs.repo
+    sections:
+      - name: sl-fastbugs
+        uri: /$slreleasever/$basearch/updates/fastbugs/
   - file: sl7-security.repo
-    section: sl-security
-    uri: /$slreleasever/$basearch/updates/security/
+    sections:
+      - name: sl-security
+        uri: /$slreleasever/$basearch/updates/security/
+  - file: sl7-rolling.repo
+    sections:
+      - name: sl-rolling
+        uri: /7rolling/$basearch/os/
+      - name: sl-rolling-security
+        uri: /7rolling/$basearch/updates/security/
+      - name: sl-rolling-fastbugs
+        uri: /7rolling/$basearch/updates/fastbugs/
   - file: sl7-testing.repo
-    section: sl-testing
-    uri: /7rolling/testing/$basearch/
-  - file: sl7-testing.repo
-    section: sl-testing-source
-    uri: /7rolling/testing/SRPMS/
-pkgmgr_sl_optional:
-  - file: repos.repo
-    section: repos
-    uri: /7x/repos/$basearch/
-  - file: repos.repo
-    section: repos-source
-    uri: /7x/repos/SRPMS/
-  - file: sl-extras.repo
-    section: sl-extras
-    uri: /7x/external_products/extras/$basearch/
-  - file: sl-extras.repo
-    section: sl-extras-debuginfo
-    uri: /7x/external_products/extras/$basearch/debuginfo/
-  - file: sl-extras.repo
-    section: sl-extras-source
-    uri: /7x/external_products/extras/SRPMS/
+    sections:
+      - name: sl-testing
+        uri: /7rolling/testing/$basearch/
+      - name: sl-testing-source
+        uri: /7rolling/testing/SRPMS/
+  - file: sl7-other.repo
+    sections:
+      - name: sl-source
+        uri: /$slreleasever/SRPMS/
+      - name: sl-debuginfo
+        uri: /$slreleasever/archive/debuginfo/
