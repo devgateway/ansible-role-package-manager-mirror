@@ -1,7 +1,7 @@
 ---
 - name: Load variables for {{ ansible_distribution }} {{ ansible_distribution_major_version }}
   include_vars:
-    file: {{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}.yml
+    file: "{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}.yml"
 
 # Regex explanation: find non-empty lines until EOL or comment (marked by "#" or ";") entirely
 # consisting of characters other than "=" and "[". In other words, find non-empty, non-comment
