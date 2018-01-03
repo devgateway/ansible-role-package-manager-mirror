@@ -14,6 +14,7 @@ Example Playbook
     - hosts: all
       roles:
         - role: package-manager-mirror
+          pkgmgr_proxy: http://proxy.example.net:3128
           pkgmgr_mirror:
             Debian: 
               default:
