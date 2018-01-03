@@ -6,7 +6,5 @@ pkgmgr_repos:
         uri: /$releasever/$basearch/os/
       - name: sl-security
         uri: /$releasever/$basearch/updates/security/
-  - file: sl.repo
-    sections:
       - name: sl-source
         uri: /$releasever/SRPMS/
