@@ -1,7 +1,7 @@
 ---
-- name: Load variables for Scientific {{ ansible_distribution_major_version }}
+- name: Load variables for {{ ansible_distribution }} {{ ansible_distribution_major_version }}
   include_vars:
-    file: scientific{{ ansible_distribution_major_version }}.yml
+    file: {{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}.yml
 
 # Regex explanation: find non-empty lines until EOL or comment (marked by "#" or ";") entirely
 # consisting of characters other than "=" and "[". In other words, find non-empty, non-comment
@@ -63,3 +63,11 @@
   with_subelements:
     - "{{ pkgmgr_repos }}"
     - sections
+
+- name: Configure proxy in {{ ansible_pkg_mgr | upper }}
+  ini_file:
+    dest: "{{ ( ansible_pkg_mgr == 'dnf') | ternary('/etc/dnf/dnf.conf', '/etc/yum.conf') }}"
+    section: main
+    option: proxy
+    value: "{{ pkgmgr_proxy }}"
+  when: pkgmgr_proxy is defined
