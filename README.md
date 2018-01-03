@@ -29,7 +29,7 @@ Example Playbook
             CentOS:
               v7: http://mirror.centos.org/centos
             Scientific:
-              v7: http://ftp.scientificlinux.org/linux/scientific
+              default: http://ftp.scientificlinux.org/linux/scientific
               v6: http://ftp.scientificlinux.org/linux/scientific
 
 License
