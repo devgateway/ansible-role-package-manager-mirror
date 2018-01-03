@@ -33,7 +33,7 @@
 # - if last line:
 #   - append hold space to pattern space
 - name: Unfold lines in repos
-  command: >
+  command: >-
     sed -i
     '1 { h; d; };
     /^[^#=[]\+\($\|[#;]\)/ {
@@ -57,7 +57,9 @@
     dest: /etc/yum.repos.d/{{ item[0].file }}
     section: "{{ item[1].name }}"
     option: baseurl
-    value: "{{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] | default(pkgmgr_mirror[ansible_distribution]['default']) }}{{ item[1].uri }}"
+    value: >-
+      {{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] |
+      default(pkgmgr_mirror[ansible_distribution]['default']) }}{{ item[1].uri }}
   with_subelements:
     - "{{ pkgmgr_repos }}"
     - sections
