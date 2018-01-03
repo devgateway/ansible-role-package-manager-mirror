@@ -8,3 +8,13 @@
   template:
     src: sources.list.j2
     dest: /etc/apt/sources.list.d/mirror.list
+
+- name: Configure APT proxy
+  lineinfile:
+    path: /etc/apt/apt.conf.d/99proxy
+    regexp: '^APT::{{ item }}::Proxy '
+    line: 'APT::{{ item }}::Proxy "{{ pkgmgr_proxy }}";'
+  with_items:
+    - http
+    - ftp
+  when: pkgmgr_proxy is defined
