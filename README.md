@@ -28,10 +28,12 @@ Example Playbook
                   - non-free
                   - contrib
             CentOS:
-              v7: http://mirror.centos.org/centos
+              default: http://mirror.centos.org/centos
             Scientific:
               default: http://ftp.scientificlinux.org/linux/scientific
-              v6: http://ftp.scientificlinux.org/linux/scientific
+            Fedora:
+              default: http://download.fedoraproject.org/pub/fedora/linux
+              v24: http://archives.fedoraproject.org/pub/archive/fedora/linux
 
 License
 -------

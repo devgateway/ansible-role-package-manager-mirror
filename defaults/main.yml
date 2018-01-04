@@ -6,14 +6,9 @@ pkgmgr_mirror:
       components:
         - main
         - contrib
-    sid:
-      url: http://ftp.debian.org/debian/
-      components:
-        - main
-        - contrib
   CentOS:
     default: http://mirror.centos.org/centos
-    v7: http://mirror.centos.org/centos
   Scientific:
     default: http://ftp.scientificlinux.org/linux/scientific
-    v7: http://ftp.scientificlinux.org/linux/scientific
+  Fedora:
+    default: http://download.fedoraproject.org/pub/fedora/linux
