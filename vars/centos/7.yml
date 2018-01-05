@@ -4,10 +4,13 @@ pkgmgr_repos:
     sections:
       - name: base
         uri: /$releasever/base/$basearch/
+        enabled: true
       - name: updates
         uri: /$releasever/updates/$basearch/
+        enabled: true
       - name: extras
         uri: /$releasever/extras/$basearch/
+        enabled: true
       - name: centosplus
         uri: /$releasever/centosplus/$basearch/
   - file: CentOS-CR.repo

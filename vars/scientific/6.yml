@@ -4,7 +4,9 @@ pkgmgr_repos:
     sections:
       - name: sl
         uri: /$releasever/$basearch/os/
+        enabled: true
       - name: sl-security
         uri: /$releasever/$basearch/updates/security/
+        enabled: true
       - name: sl-source
         uri: /$releasever/SRPMS/

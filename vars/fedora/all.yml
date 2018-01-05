@@ -4,6 +4,7 @@ pkgmgr_repos:
     sections:
       - name: fedora
         uri: /releases/$releasever/Everything/$basearch/os/
+        enabled: true
       - name: fedora-debuginfo
         uri: /releases/$releasever/Everything/$basearch/debug/tree/
       - name: fedora-source
@@ -12,6 +13,7 @@ pkgmgr_repos:
     sections:
       - name: updates
         uri: /updates/$releasever/$basearch/
+        enabled: true
       - name: updates-debuginfo
         uri: /updates/$releasever/$basearch/debug/
       - name: updates-source

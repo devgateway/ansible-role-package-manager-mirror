@@ -4,14 +4,17 @@ pkgmgr_repos:
     sections:
       - name: sl
         uri: /$slreleasever/$basearch/os/
+        enabled: true
   - file: sl7-fastbugs.repo
     sections:
       - name: sl-fastbugs
         uri: /$slreleasever/$basearch/updates/fastbugs/
+        enabled: true
   - file: sl7-security.repo
     sections:
       - name: sl-security
         uri: /$slreleasever/$basearch/updates/security/
+        enabled: true
   - file: sl7-rolling.repo
     sections:
       - name: sl-rolling
