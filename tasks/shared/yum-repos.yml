@@ -11,6 +11,7 @@
   register: grep_result
   changed_when: false
   failed_when: grep_result.rc > 2
+  check_mode: false
 
 # Script explanation
 # FIRST LINE:
@@ -43,7 +44,7 @@
     $ G;
     };'
     {{ grep_result.stdout_lines | map('quote') | join(' ') }}
-  when: grep_result.rc == 0
+  when: not ansible_check_mode and grep_result.rc == 0
   args:
     chdir: /etc/yum.repos.d
     warn: false
