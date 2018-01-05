@@ -26,6 +26,10 @@ Values are base URLs (see example below). They should be one level **above** the
 * major release numbers in CentOS and Scientific
 * *releases* in Fedora
 
+### `pkgmgr_restore_enabled`
+
+Whether to restore the enabled/disabled status as defined in original (from the RPM) repo configuration. Default is *true*.
+
 Example Playbook
 ----------------
 
