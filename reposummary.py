@@ -8,36 +8,23 @@ import yaml
 
 class RepoList:
     def __init__(self):
-        self._files = {}
+        self._repos = {}
 
     def add_file(self, filename):
-        base_name = os.path.basename(filename)[:-5]
-        self._files[base_name] = {}
+        base_name = os.path.basename(filename)
 
         ini = ConfigParser.ConfigParser()
         ini.read(filename)
 
         for repoid in ini.sections():
-            self._files[base_name][repoid] = {}
-            repo = self._files[base_name][repoid]
-
-            repo['name'] = ini.get(repoid, 'name')
+            self._repos[repoid] = {'file': base_name}
 
             baseurls = ini.get(repoid, 'baseurl').split('\n')
             baseurls.sort()
-            repo['baseurl'] = baseurls[0]
-
-            try:
-                if ini.getboolean(repoid, 'enabled'):
-                    enabled = 1
-                else:
-                    enabled = 0
-            except ConfigParser.NoOptionError as err:
-                enabled = 1
-            repo['enabled'] = enabled
+            self._repos[repoid]['baseurl'] = baseurls[0]
 
     def __str__(self):
-        return yaml.dump(self._files, default_flow_style = False)
+        return yaml.dump(self._repos, default_flow_style = False)
 
 repo_list = RepoList()
 
