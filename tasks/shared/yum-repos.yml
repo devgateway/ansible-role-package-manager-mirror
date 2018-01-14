@@ -49,48 +49,26 @@
     chdir: /etc/yum.repos.d
     warn: false
 
+# Use ini_file, not yum_repository, as it doesn't require description and other data
 - name: Configure baseurl in repos
   ini_file:
-    dest: /etc/yum.repos.d/{{ item[0].file }}
-    section: "{{ item[1].name }}"
+    dest: /etc/yum.repos.d/{{ item.file }}
+    section: "{{ item.name }}"
     option: baseurl
     value: >-
       {{ pkgmgr_mirror[ansible_distribution]['v' + ansible_distribution_major_version] |
-      default(pkgmgr_mirror[ansible_distribution]['default']) }}{{ item[1].uri }}
-  with_subelements:
-    - "{{ pkgmgr_repos }}"
-    - sections
+      default(pkgmgr_mirror[ansible_distribution]['default']) }}{{ item.uri }}
+  with_items: "{{ pkgmgr_repos }}"
 
-- name: Disable metalinks in repos
+- name: Disable metalinks and mirror lists
   ini_file:
-    dest: /etc/yum.repos.d/{{ item[0].file }}
-    section: "{{ item[1].name }}"
-    option: metalink
+    dest: /etc/yum.repos.d/{{ item.0.file }}
+    section: "{{ item.0.name }}"
+    option: "{{ item.1 }}"
     state: absent
-  with_subelements:
+  with_nested:
     - "{{ pkgmgr_repos }}"
-    - sections
-
-- name: Disable mirror lists in repos
-  ini_file:
-    dest: /etc/yum.repos.d/{{ item[0].file }}
-    section: "{{ item[1].name }}"
-    option: mirrorlist
-    state: absent
-  with_subelements:
-    - "{{ pkgmgr_repos }}"
-    - sections
-
-- name: Restore repo enabled status
-  ini_file:
-    dest: /etc/yum.repos.d/{{ item[0].file }}
-    section: "{{ item[1].name }}"
-    option: enabled
-    value: "{{ item[1].enabled | default(false) | ternary('1', '0') }}"
-  with_subelements:
-    - "{{ pkgmgr_repos }}"
-    - sections
-  when: pkgmgr_restore_enabled | default(true)
+    - [ metalink, mirrorlist ]
 
 - name: Configure proxy in {{ ansible_pkg_mgr | upper }}
   ini_file:

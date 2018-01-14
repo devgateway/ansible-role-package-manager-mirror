@@ -1,37 +1,32 @@
 ---
 pkgmgr_repos:
-  - file: sl7.repo
-    sections:
-      - name: sl
-        uri: /$slreleasever/$basearch/os/
-        enabled: true
-  - file: sl7-fastbugs.repo
-    sections:
-      - name: sl-fastbugs
-        uri: /$slreleasever/$basearch/updates/fastbugs/
-        enabled: true
-  - file: sl7-security.repo
-    sections:
-      - name: sl-security
-        uri: /$slreleasever/$basearch/updates/security/
-        enabled: true
-  - file: sl7-rolling.repo
-    sections:
-      - name: sl-rolling
-        uri: /7rolling/$basearch/os/
-      - name: sl-rolling-security
-        uri: /7rolling/$basearch/updates/security/
-      - name: sl-rolling-fastbugs
-        uri: /7rolling/$basearch/updates/fastbugs/
-  - file: sl7-testing.repo
-    sections:
-      - name: sl-testing
-        uri: /7rolling/testing/$basearch/
-      - name: sl-testing-source
-        uri: /7rolling/testing/SRPMS/
-  - file: sl7-other.repo
-    sections:
-      - name: sl-source
-        uri: /$slreleasever/SRPMS/
-      - name: sl-debuginfo
-        uri: /$slreleasever/archive/debuginfo/
+- file: sl7.repo
+  name: sl
+  uri: /$slreleasever/$basearch/os/
+- file: sl7-testing.repo
+  name: sl-testing
+  uri: /7rolling/testing/$basearch/
+- file: sl7-testing.repo
+  name: sl-testing-source
+  uri: /7rolling/testing/SRPMS/
+- file: sl7-security.repo
+  name: sl-security
+  uri: /$slreleasever/$basearch/updates/security/
+- file: sl7-rolling.repo
+  name: sl-rolling
+  uri: /7rolling/$basearch/os/
+- file: sl7-rolling.repo
+  name: sl-rolling-security
+  uri: /7rolling/$basearch/updates/security/
+- file: sl7-rolling.repo
+  name: sl-rolling-fastbugs
+  uri: /7rolling/$basearch/updates/fastbugs/
+- file: sl7-other.repo
+  name: sl-source
+  uri: /$slreleasever/SRPMS/
+- file: sl7-other.repo
+  name: sl-debuginfo
+  uri: /$slreleasever/archive/debuginfo/
+- file: sl7-fastbugs.repo
+  name: sl-fastbugs
+  uri: /$slreleasever/$basearch/updates/fastbugs/

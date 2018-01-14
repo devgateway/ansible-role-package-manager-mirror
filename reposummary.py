@@ -20,7 +20,7 @@ class RepoList:
 
         for repoid in ini.sections():
             repo = {}
-            repo['id'] = repoid
+            repo['name'] = repoid
             repo['file'] = base_name
 
             baseurls = ini.get(repoid, 'baseurl').split('\n')
