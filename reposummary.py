@@ -9,7 +9,7 @@ import yaml
 class RepoList:
     def __init__(self):
         self._repos = {}
-        self._baseurls = set()
+        self._prefix = None
 
     def add_file(self, filename):
         base_name = os.path.basename(filename)
@@ -22,15 +22,31 @@ class RepoList:
 
             baseurls = ini.get(repoid, 'baseurl').split('\n')
             baseurls.sort()
-            self._repos[repoid]['baseurl'] = baseurls[0]
-            self._baseurls.add(baseurls[0].split('/'))
+            self._repos[repoid]['uri'] = baseurls[0]
 
     def __str__(self):
+        if self._prefix is None:
+            self._find_prefix()
+        print self._prefix
         return yaml.dump(self._repos, default_flow_style = False)
 
-    def find_prefix(self):
-        for i in range(0, len(self._baseurls[0]) - 1):
-            pass
+    def _find_prefix(self):
+        prefix = None
+        for repo in self._repos.itervalues():
+            uri = repo['uri'].split('/')
+            if prefix is None:
+                prefix = uri
+            else:
+                for i in range(0, min(len(prefix), len(uri)) - 1):
+                    if prefix[i] != uri[i]:
+                        del prefix[i:]
+                        break
+
+        self._prefix = '/'.join(prefix)
+        start = len(self._prefix)
+
+        for repo in self._repos.itervalues():
+            repo['uri'] = repo['uri'][start:]
 
 repo_list = RepoList()
 
