@@ -3,9 +3,6 @@ pkgmgr_repos:
 - file: CentOS-fasttrack.repo
   name: fasttrack
   uri: /$releasever/fasttrack/$basearch/
-- file: CentOS-CR.repo
-  name: cr
-  uri: /$releasever/cr/$basearch/
 - file: CentOS-Base.repo
   name: base
   uri: /$releasever/os/$basearch/
@@ -18,3 +15,6 @@ pkgmgr_repos:
 - file: CentOS-Base.repo
   name: centosplus
   uri: /$releasever/centosplus/$basearch/
+- file: CentOS-Base.repo
+  name: contrib
+  uri: /$releasever/contrib/$basearch/

@@ -1,12 +1,11 @@
 ---
 pkgmgr_repos:
-  - file: sl.repo
-    sections:
-      - name: sl
-        uri: /$releasever/$basearch/os/
-        enabled: true
-      - name: sl-security
-        uri: /$releasever/$basearch/updates/security/
-        enabled: true
-      - name: sl-source
-        uri: /$releasever/SRPMS/
+- file: sl.repo
+  name: sl
+  uri: /$releasever/$basearch/os/
+- file: sl.repo
+  name: sl-security
+  uri: /$releasever/$basearch/updates/security/
+- file: sl.repo
+  name: sl-source
+  uri: /$releasever/SRPMS/

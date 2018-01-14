@@ -1,28 +1,29 @@
 ---
 pkgmgr_repos:
-  - file: fedora.repo
-    sections:
-      - name: fedora
-        uri: /releases/$releasever/Everything/$basearch/os/
-        enabled: true
-      - name: fedora-debuginfo
-        uri: /releases/$releasever/Everything/$basearch/debug/tree/
-      - name: fedora-source
-        uri: /releases/$releasever/Everything/source/tree/
-  - file: fedora-updates.repo
-    sections:
-      - name: updates
-        uri: /updates/$releasever/$basearch/
-        enabled: true
-      - name: updates-debuginfo
-        uri: /updates/$releasever/$basearch/debug/
-      - name: updates-source
-        uri: /updates/$releasever/SRPMS/
-  - file: fedora-updates-testing.repo
-    sections:
-      - name: updates-testing
-        uri: /updates/testing/$releasever/$basearch/
-      - name: updates-testing-debuginfo
-        uri: /updates/testing/$releasever/$basearch/debug/
-      - name: updates-testing-source
-        uri: /updates/testing/$releasever/SRPMS/
+- file: fedora-updates-testing.repo
+  name: updates-testing
+  uri: /updates/testing/$releasever/$basearch/
+- file: fedora-updates-testing.repo
+  name: updates-testing-debuginfo
+  uri: /updates/testing/$releasever/$basearch/debug/
+- file: fedora-updates-testing.repo
+  name: updates-testing-source
+  uri: /updates/testing/$releasever/SRPMS/
+- file: fedora-updates.repo
+  name: updates
+  uri: /updates/$releasever/$basearch/
+- file: fedora-updates.repo
+  name: updates-debuginfo
+  uri: /updates/$releasever/$basearch/debug/
+- file: fedora-updates.repo
+  name: updates-source
+  uri: /updates/$releasever/SRPMS/
+- file: fedora.repo
+  name: fedora
+  uri: /releases/$releasever/Everything/$basearch/os/
+- file: fedora.repo
+  name: fedora-debuginfo
+  uri: /releases/$releasever/Everything/$basearch/debug/tree/
+- file: fedora.repo
+  name: fedora-source
+  uri: /releases/$releasever/Everything/source/tree/
