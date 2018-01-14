@@ -27,8 +27,9 @@ class RepoList:
     def __str__(self):
         if self._prefix is None:
             self._find_prefix()
-        print self._prefix
-        return yaml.dump(self._repos, default_flow_style = False)
+            sys.stderr.write(self._prefix + '\n')
+
+        return yaml.dump({'pkgmgr_repos': self._repos}, default_flow_style = False)
 
     def _find_prefix(self):
         prefix = None
