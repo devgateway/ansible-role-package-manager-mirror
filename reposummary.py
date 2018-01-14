@@ -8,7 +8,7 @@ import yaml
 
 class RepoList:
     def __init__(self):
-        self._repos = {}
+        self._repos = []
         self._prefix = None
 
     def add_file(self, filename):
@@ -18,11 +18,14 @@ class RepoList:
         ini.read(filename)
 
         for repoid in ini.sections():
-            self._repos[repoid] = {'file': base_name}
+            repo = {}
+            repo['id'] = repoid
+            repo['file'] = base_name
 
             baseurls = ini.get(repoid, 'baseurl').split('\n')
             baseurls.sort()
-            self._repos[repoid]['uri'] = baseurls[0]
+            repo['uri'] = baseurls[0]
+            self._repos.append(repo)
 
     def __str__(self):
         if self._prefix is None:
@@ -33,7 +36,7 @@ class RepoList:
 
     def _find_prefix(self):
         prefix = None
-        for repo in self._repos.itervalues():
+        for repo in self._repos:
             uri = repo['uri'].split('/')
             if prefix is None:
                 prefix = uri
@@ -46,7 +49,7 @@ class RepoList:
         self._prefix = '/'.join(prefix)
         start = len(self._prefix)
 
-        for repo in self._repos.itervalues():
+        for repo in self._repos:
             repo['uri'] = repo['uri'][start:]
 
 repo_list = RepoList()
@@ -54,4 +57,4 @@ repo_list = RepoList()
 for repo_filename in glob.glob(os.path.join(sys.argv[1], '*.repo')):
     repo_list.add_file(repo_filename)
 
-print repo_list
+print '---\n' + str(repo_list)
