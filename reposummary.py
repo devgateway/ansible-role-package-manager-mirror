@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# USAGE: reposummary.py /path/to/yum.repos.d > vars/myvars.yml
 import glob
 import sys
 import os.path
