@@ -43,7 +43,7 @@ class RepoList:
                 prefix = uri
             else:
                 for i in range(0, min(len(prefix), len(uri)) - 1):
-                    if prefix[i] != uri[i]:
+                    if prefix[i] != uri[i] or '$' in uri[i]:
                         del prefix[i:]
                         break
 
@@ -58,4 +58,4 @@ repo_list = RepoList()
 for repo_filename in glob.glob(os.path.join(sys.argv[1], '*.repo')):
     repo_list.add_file(repo_filename)
 
-print '---\n' + str(repo_list)
+print '---\n' + str(repo_list)[:-1]
