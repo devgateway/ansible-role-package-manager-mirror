@@ -1,5 +1,5 @@
 ---
-- name: Include var loading tasks for {{ ansible_distribution }}
+- name: Include var loading tasks per distribution
   include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: Include shared tasks for YUM and DNF
