@@ -1,4 +1,4 @@
 ---
 - name: Load variables for Fedora
   include_vars:
-    file: "fedora/all.yml"
+    file: "fedora/{{ ansible_distribution_major_version }}.yml"
