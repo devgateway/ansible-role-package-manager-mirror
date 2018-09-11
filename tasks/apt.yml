@@ -11,6 +11,7 @@
 
 - name: Configure APT proxy
   lineinfile:
+    create: true
     path: /etc/apt/apt.conf.d/99proxy
     regexp: '^APT::{{ item }}::Proxy '
     line: 'APT::{{ item }}::Proxy "{{ pkgmgr_proxy }}";'
